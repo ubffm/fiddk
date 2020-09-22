@@ -1,5 +1,40 @@
 # Datenmodell FID DK - Application Profile EDM
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Datenmodell FID DK - Application Profile EDM](#datenmodell-fid-dk-application-profile-edm)
+	- [Allgemeines](#allgemeines)
+	- [EDM Core Classes](#edm-core-classes)
+		- [edm:ProvidedCHO](#edmprovidedcho)
+			- [Zusätzliche ProvidedCHO Properties im FIDDK](#zusätzliche-providedcho-properties-im-fiddk)
+		- [ore:Aggregation](#oreaggregation)
+			- [Zusätzliche Aggregation Properties im FIDDK](#zusätzliche-aggregation-properties-im-fiddk)
+		- [edm:WebResource](#edmwebresource)
+			- [Zusätzliche Webresource Properties im FIDDK](#zusätzliche-webresource-properties-im-fiddk)
+	- [EDM Contextual Classes](#edm-contextual-classes)
+		- [edm:Agent](#edmagent)
+			- [foaf:Person](#foafperson)
+				- [zusätzliche Person Properties im FIDDK](#zusätzliche-person-properties-im-fiddk)
+			- [foaf:Organization](#foaforganization)
+				- [zusätzliche Organization Properties im FIDDK](#zusätzliche-organization-properties-im-fiddk)
+		- [edm:Place](#edmplace)
+			- [Zusätzliche Place Properties im FIDDK](#zusätzliche-place-properties-im-fiddk)
+		- [edm:Timespan](#edmtimespan)
+		- [skos:Concept](#skosconcept)
+			- [Zusätzliche Concept Properties im FIDDK](#zusätzliche-concept-properties-im-fiddk)
+		- [edm:Event](#edmevent)
+			- [Zusätzliche Event Properties im FIDDK](#zusätzliche-event-properties-im-fiddk)
+	- [Namespaces](#namespaces)
+		- [zusätzliche Namespaces im FIDDK](#zusätzliche-namespaces-im-fiddk)
+	- [Identifier](#identifier)
+		- [Format](#format)
+	- [Datumsformatierung](#datumsformatierung)
+		- [Beispiele](#beispiele)
+	- [XML Schema](#xml-schema)
+	- [Beispieldatensätze](#beispieldatensätze)
+	- [Aktuell ungelöste Probleme](#aktuell-ungelöste-probleme)
+
+<!-- /TOC -->
 
 ## Allgemeines
 - Nachnutzung des Metadatenstandards [EDM (Europeana Data Model)](https://pro.europeana.eu/page/edm-documentation) + universell (GLAM) + erweiterbar + flexibel + RDF basiert
