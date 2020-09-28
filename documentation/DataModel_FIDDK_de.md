@@ -26,7 +26,6 @@
 			- [Zusätzliche Concept Properties im FIDDK](#zusätzliche-concept-properties-im-fiddk)
 		- [edm:Event](#edmevent)
 			- [Zusätzliche Event Properties im FIDDK](#zusätzliche-event-properties-im-fiddk)
-	- [Schematische Darstellung](#schematische-darstellung)
 	- [Statistik](#statistik)
 	- [Identifier](#identifier)
 		- [Format](#format)
@@ -72,7 +71,7 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 ## EDM Core Classes
 `edm:ProvidedCHO`, `ore:Aggregation` und `edm:WebResource` repräsentieren Informationen über das Cultural Heritage Object. Im Gegensatz zu den kontextuellen Klassen, die Personen/Körperschaften, Orte, Ereignisse, Konzepte oder Epochen beschreiben, die mit dem Objekt in Relation stehen.
 
-![EDM](Pic4.png)
+<img src="images/Classes.png" alt="EDM Classes" width="600px"/>
 
 ### edm:ProvidedCHO
 Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie z.B. Buch, Programmheft, Grafik, Fotografie, Kostüm, Theaterzettel, Plakat, Video, Brief, ...). Es steht im Gegensatz zur `edm:WebResource`, die eine digitale Repräsentation des physischen Objekts abbildet.
@@ -80,6 +79,15 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 - Bei Angaben zu Personen, die mit dem Provided CHO in Verbindung stehen, soll bevorzugt auf Normdaten in `foaf:Person` oder `foaf:Organzation` verlinkt werden und ein Literal nur benutzt werden, wenn keine Normdaten vorhanden sind.
 - Sprachangaben für textuelle Angaben wie z.B. bei `dc:description` werden dem XML Standard entsprechend als Attribut `@xml:lang` mit *ISO 639-1* angegeben
 - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
+
+<div>
+<img src="images/CHO_1.png" alt="CHO_1" style="width: 500px; align:left;"/>
+<img src="images/CHO_2.png" alt="CHO_2" style="width: 500px; align:right;"/>
+</div>
+<div>
+<img src="images/CHO_3.png" alt="CHO_3" style="width: 500px; align:left;"/>
+<img src="images/CHO_4.png" alt="CHO_4" style="width: 500px; align:right;"/>
+</div>
 
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
@@ -206,6 +214,8 @@ Properties | Value type | Cardinality | Bibo / Rdau Note | FIDDK Note
 ### ore:Aggregation
 Verbindet ein Objekt (provided CHO) mit den zugehörigen Webresourcen. Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
 
+<img src="images/Aggregation.png" alt="Aggregation" width="600px"/>
+
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
 ~~`ore:aggregates`~~ | ~~reference~~ |	~~min 0, max unbounded~~ | ~~(in principle only stated via `edm:hasView` and `edm:aggregatedCHO` statements)~~ | -
@@ -226,6 +236,8 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 
 ### edm:WebResource
 Eine digitale Repräsentation des vorliegenden provided CHO. - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
+
+<img src="images/WebResource.png" alt="WebResource" width="600px"/>
 
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
@@ -261,6 +273,8 @@ In EDM wird `edm:Agent` für "[...] people, either individually or in groups [..
 #### foaf:Person
 Hier auf Basis von `edm:Agent`, im Original EDM gibt es `foaf:Person` in der Form nicht, kann auf diese Weise aber wieder in das Original EDM zurückgeführt werden.
 
+<img src="images/Person.png" alt="Person" width="600px"/>
+
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
 `skos:prefLabel` | literal | min 0, max 1 per lang tag | The preferred form of the name of the agent. Although the maximum number of occurrences is set at 1, it can be interpreted as 1 per language tag. At least one `skos:prefLabel` SHOULD be provided. Several prefLabels with languages tags are strongly recommended for language variants and translations.<br>`<skos:prefLabel xml:lang="fr">Courtois neveu aîné</skos:prefLabel>` <br> `<skos:prefLabel xml:lang="en">Courtois’eldest nephew</skos:prefLabel>` | voller bevorzugter Name (nicht als "Nachname, Vorname"); Sprachtag sofern bekannt
@@ -292,6 +306,8 @@ Properties | Value type | Cardinality | FIDDK Note
 #### foaf:Organization
 Hier auf Basis von `foaf:Organzation` der Object Templates, im Original EDM gibt es `foaf:Organzation` in der Form nicht, kann auf diese Weise aber wieder in das Original EDM zurückgeführt werden.
 
+<img src="images/Organization.png" alt="Organization" width="600px"/>
+
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
 `skos:prefLabel` | literal | min 0, max 1 per lang tag | The preferred form of the name of the agent. Although the maximum number of occurrences is set at 1, it can be interpreted as 1 per language tag. At least one `skos:prefLabel` SHOULD be provided. Several prefLabels with languages tags are strongly recommended for language variants and translations.<br>`<skos:prefLabel xml:lang="fr">Courtois neveu aîné</skos:prefLabel>` <br> `<skos:prefLabel xml:lang="en">Courtois’eldest nephew</skos:prefLabel>` | bevorzugter Name der Körperschaft; Sprachtag sofern bekannt
@@ -320,6 +336,8 @@ Properties | Value type | Cardinality | FIDDK Note
 
 ### edm:Place
 Ein Ort kann im FIDDK auch ein Theatergebäude sein (im Unterschied zur Institution des Theaters als Körperschaften).
+
+<img src="images/Place.png" alt="Place" width="500px"/>
 
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
@@ -358,6 +376,8 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ### skos:Concept
 Der FIDDK stützt sich bei Konzepten vor allem auf Sachbegriffe der GND und deren Relationen. Konzepte im FIDDK können auch Epochenangaben sein.
 
+<img src="images/Concept.png" alt="Concept" width="500px"/>
+
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
 `skos:prefLabel` | literal | min 0, max 1 per lang tag | The preferred form of the name of the concept. Although the maximum number of occurrences is set at 1, it can be interpreted as 1 per language tag. At least one `skos:prefLabel` SHOULD be provided.Several prefLabels with languages tags are strongly recommended for language variants and translations. <br> `<skos:prefLabel xml:lang="fr">Buccin</skos:prefLabel>` `<skos:prefLabel xml:lang="de">Buccin</skos:prefLabel>` `<skos:prefLabel xml:lang="nl">Buccin</skos:prefLabel>` | Bevorzugter Name des Konzepts; Sprachtag sofern bekannt
@@ -377,6 +397,8 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ### edm:Event
 Events basieren entweder auf der GND (Konferenz oder Ereignis bzw. Konferenz-/Ereignisfolge) oder auf strukturierten oder Freitextangaben der Datengeber_innen.
 
+<img src="images/Event.png" alt="Event" width="600px"/>
+
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
 `edm:happenedAt` | reference to Place **or literal** | min 0, max unbounded | - | Ereignisort
@@ -395,11 +417,9 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 #### Zusätzliche Event Properties im FIDDK
 - alle Tätigkeitsproperties, die auch zu `edm:ProvidedCHO` hinzugefügt wurden (s.o.)
 
-## Schematische Darstellung
-
-
 ## Statistik
-
+Welche Properties werden tatsächlich in welcher Anzahl genutzt?
+TODO
 
 ## Identifier
 - Jede Resource muss einen eigenen Unique Resource Identifier (URI) haben, um sie miteinander verlinkbar zu machen.
