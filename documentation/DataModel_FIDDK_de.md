@@ -80,14 +80,10 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 - Sprachangaben für textuelle Angaben wie z.B. bei `dc:description` werden dem XML Standard entsprechend als Attribut `@xml:lang` mit *ISO 639-1* angegeben
 - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
 
-<div>
-<img src="images/CHO_1.png" alt="CHO_1" style="width: 500px; align:left;"/>
-<img src="images/CHO_2.png" alt="CHO_2" style="width: 500px; align:right;"/>
-</div>
-<div>
-<img src="images/CHO_3.png" alt="CHO_3" style="width: 500px; align:left;"/>
-<img src="images/CHO_4.png" alt="CHO_4" style="width: 500px; align:right;"/>
-</div>
+<img src="images/CHO_1.png" alt="CHO_1" width="500px"/>
+<img src="images/CHO_2.png" alt="CHO_2" width="500px"/>
+<img src="images/CHO_3.png" alt="CHO_3" width="500px"/>
+<img src="images/CHO_4.png" alt="CHO_4" width="500px""/>
 
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
