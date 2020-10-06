@@ -31,6 +31,7 @@
 		- [Format](#format)
 	- [Datumsformatierung](#datumsformatierung)
 		- [Beispiele](#beispiele)
+	- [Modellierung von Unsicherheit](#modellierung-von-unsicherheit)
 	- [XML Schema](#xml-schema)
 	- [Beispieldatensätze](#beispieldatensätze)
 	- [Aktuell ungelöste Probleme](#aktuell-ungelöste-probleme)
@@ -67,6 +68,9 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 ### Zusätzliche Namespaces im FIDDK
 - `bibo`: http://purl.org/ontology/bibo/
 - `rdau`: http://rdaregistry.info/Elements/u/
+- `dm2e`: http://onto.dm2e.eu/schemas/dm2e/
+
+Der DM2E Namespace ist eigentlich über den Link nicht mehr erreichbar und wahrscheinlich deprecated. Er wird nur noch für `dm2e:callNumber` verwendet, da es keine passende Entsprechung für "Signatur" in anderen Namespaces gibt.
 
 ## EDM Core Classes
 `edm:ProvidedCHO`, `ore:Aggregation` und `edm:WebResource` repräsentieren Informationen über das Cultural Heritage Object. Im Gegensatz zu den kontextuellen Klassen, die Personen/Körperschaften, Orte, Ereignisse, Konzepte oder Epochen beschreiben, die mit dem Objekt in Relation stehen.
@@ -121,7 +125,7 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 `dcterms:references` | literal or reference to CHO | min 0, max unbounded | Other resources referenced, cited or otherwise pointed to by the CHO. <br>`<dcterms:references>Honderd jaar Noorse schilderkunst</dcterms:references>` | CHO referenziert andere Objekte; Inverses: `dcterms:isReferencedBy`; im FIDDK noch nicht vorgekommen
 `dcterms:replaces` | literal or reference to CHO | min 0, max unbounded | A related resource that is supplanted, displaced, or superseded by the CHO. `<dcterms:replaces>http://dublincore.org/about/2006/01/01/bylaws/</dcterms:replaces>` where the resource described is a newer version (http://dublincore.org/about/2009/01/05/bylaws/) or link to resource `<dcterms:replaces rdf:resource=“http://dublincore.org/about/2006/01/01/bylaws/”/>` | CHO ersetzt andere Objekte; Inverses: `dcterms:isReplacedBy`; im FIDDK noch nicht vorgekommen
 `dcterms:requires` | literal or reference to CHO | min 0, max unbounded | Another resource that is required by the described resource to support its function, delivery or coherence. `<dcterms:requires>http://ads.ahds.ac.uk/project/userinfo/css/oldbrowsers.css</dcterms:requires>` where the resource described is an HTML file at http://ads.ahds.ac.uk/project/userinfo/digitalTextArchiving.html | CHO verlangt andere Objekte für Funktionalität/Kohärenz; Inverses: `dcterms:isRequiredBy`; im FIDDK noch nicht vorgekommen
-`dcterms:spatial` | literal or reference to Place | min 0, max unbounded - one of `dc:subject`, `dc:type`, `dcterms:spatial` or `dcterms:temporal` is mandatory | Spatial characteristics of the CHO. i.e. what the CHO represents or depicts in terms of space (e.g. a location, co-­ordinate or place). Either `dcterms:spatial` or `dc:type` or `dc:subject` or `dcterms:temporal` must be provided; if more than one of these properties is available, please provide them all. `dcterms:spatial` is used to record the place depicted in the CHO and other locations associated with it as opposed to `edm:currentLocation` which is used only to record the place where the CHO is currently held (e.g. a museum or gallery). Be careful to choose the most appropriate one! `<dcterms:spatial>Portugal</dcterms:spatial>` or create a reference to an instance of the Place class `<dcterms:spatial rdf:resource=“http://sws.geonames.org/2264397/”/>` | Allgemeine, nicht spezifische Referenz auf Ort (ohne Angabe welcher Art (z.B. Erscheinungsort) die Beziehung ist); im FIDDK werden (wenn möglich) genauere Referenzen `rdau:P60163` bevorzugt
+`dcterms:spatial` | literal or reference to Place | min 0, max unbounded - one of `dc:subject`, `dc:type`, `dcterms:spatial` or `dcterms:temporal` is mandatory | Spatial characteristics of the CHO. i.e. what the CHO represents or depicts in terms of space (e.g. a location, co-­ordinate or place). Either `dcterms:spatial` or `dc:type` or `dc:subject` or `dcterms:temporal` must be provided; if more than one of these properties is available, please provide them all. `dcterms:spatial` is used to record the place depicted in the CHO and other locations associated with it as opposed to `edm:currentLocation` which is used only to record the place where the CHO is currently held (e.g. a museum or gallery). Be careful to choose the most appropriate one! `<dcterms:spatial>Portugal</dcterms:spatial>` or create a reference to an instance of the Place class `<dcterms:spatial rdf:resource=“http://sws.geonames.org/2264397/”/>` | Allgemeine, nicht spezifische Referenz auf Ort (ohne Angabe welcher Art (z.B. Erscheinungsort) die Beziehung ist); im FIDDK werden (wenn möglich) genauere Referenzen `rdau:P60162` oder `rdau:P60163` bevorzugt
 `dcterms:tableOfContents` | literal or reference | min 0, max unbounded | A list of sub­‐units of the CHO. <br>`<dcterms:tableOfContents>Chapter 1. Introduction, Chapter 2. History </dcterms:tableOfContents>` | Inhaltsverzeichnis / Bestandsverzeichnis / Auflistung der Inhalte
 `dcterms:temporal` | literal or reference to Timespan | min 0, max unbounded - one of `dc:subject`, `dc:type`, `dcterms:spatial` or `dcterms:temporal` is mandatory | Temporal characteristics of the CHO. i.e. what the CHO is about or depicts in terms of time (e.g. a period, date or date range.)Either `dcterms:temporal` or `dc:type` or `dc:subject` or `dcterms:spatial` must be provided; if more than one of these properties is available, please provide them all. Europeana recommends date conforming to ISO 8601 starting with the year and with hyphens (YYYY-­MMDD). NB: other EDM elements are relevant for expressing dates of different events in the life of the CHO: `dc:date`, `dcterms:created` and `dcterms:issued`. Be careful and choose the most appropriate one! `<dcterms:temporal>Roman Empire</dcterms:temporal>`or create a reference to an instance of the TimeSpan class`<dcterms:temporal rdf:resource=“http://semium.org/time/roman_empire”/>` | Allgemeine, nicht spezifische Datumsangabe (ohne Angabe welcher Art (z.B. Erscheinungsdatum) die Beziehung ist); im FIDDK werden (wenn möglich) genauere Referenzen `dcterms:created` bzw. `dcterms:issued` bevorzugt
 `edm:currentLocation` | literal or reference | min 0, min 1 | The geographic location whose boundaries presently include the CHO. This location must have a position within an established positioning system: a location with coordinates or address or inside another location that has a position, such as a room within a (museum) building. Ideally this position should be provided with the value of the property, either by using a reference (to a Place entity) that has coordinates or an address attribute, or as a simple literal. `edm:currentLocation` is used only to record the place where the CHO is currently held (e.g. a museum or gallery); `dcterms:spatial` is used to record the place depicted in the CHO and other locations associated with it. Be careful to choose the most appropriate one! `<edm:currentLocation rdf:resource=“http://sws.geonames.org/2950159”/>` (Identifier for Berlin) | Aktueller Standort des CHO
@@ -145,14 +149,16 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 - RDAU hätte noch weitere interessante Tätigkeitsproperties und auch um Objektbeziehungen genauer zu definieren (ist choreografische Adaption von..., Drehbuch basiert auf..., hat Libretto... usw.). So detailliert wird es jedoch selten von Datengeber_innen erfasst.
 - bibo kann nicht durch rdau ersetzt werden. Es gibt zwar ISSN, aber nicht ISBN oder volume
 
-Properties | Value type | Cardinality | Bibo / Rdau Note | FIDDK Note
+Properties | Value type | Cardinality | Bibo / Dm2e / Rdau Note | FIDDK Note
 ------------|------------|------------|------------|------------|
 `bibo:isbn` | literal | min 0, max 1 | ISBN | ISBN bei Büchern; Formatprüfung auf ISBN
 `bibo:issn` | literal | min 0, max 1 | ISSN | ISSN bei Zeitschriften; Formatprüfung auf ISSN
 `bibo:volume` | literal | min 0, max 1 | A volume number | Volume; im FIDDK auch: Bandangabe, Jahrgang, Nummer in Serie, Opus-Nummer
+`dm2e:callNumber` | literal | min 0, max 1 | The call number for some archival item | Signatur
 `rdau:P60062` | literal or reference to Agent | min 0, max unbounded | "has production company" - Relates a resource to an agent who is responsible for managing the financial, technical, and organizational aspects of a production for stage, screen, sound recording, television, webcast, etc. | Produktionsfirma (Theater/Film/...)
 `rdau:P60066` | literal or reference to Agent | min 0, max unbounded | "has collector" - Relates a resource to a curator that brings together resources from various sources that are arranged, described, or catalogued as a collection. | Sammler_in (nicht Kurator_in :arrow_right: gibt es in rdau auch: `rdau:P60376`)
 `rdau:P60074` | literal or reference to Timespan | min 0, max unbounded | "has date of capture" - Relates a resource to a timespan associated with recording, filming, etc., the content of a resource. | Aufnahmedatum bei Mitschnitten (Audio/Video)
+`rdau:P60091` | literal or reference to Agent | min 0, max unbounded | "has donor" - Relates a resource to a former owner of a resource that donated the resource to another owner. | Geber_in / Spender_in / Schenkende Person
 `rdau:P60141` | literal or reference to Agent | min 0, max unbounded | "has conductor" - Relates a resource to a performer who contributes to a musical resource by leading a performing group in a musical or dramatic presentation, etc. | Dirigent_in; nicht musikalische Leitung (s. P60383)
 `rdau:P60142` | literal or reference to Agent | min 0, max unbounded | "has actor" - Relates a resource to a performer that contributes to a resources by acting as a cast member or player in a musical or dramatic presentation, etc. | Schauspieler_in / Darsteller_in
 `rdau:P60144` | literal or reference to Agent | min 0, max unbounded | "has dancer" - Relates a resource to a performer who contributes to a resource by dancing in a musical, dramatic, etc., presentation. | Tänzer_in
@@ -164,6 +170,7 @@ Properties | Value type | Cardinality | Bibo / Rdau Note | FIDDK Note
 `rdau:P60154` | literal or reference to Agent | min 0, max unbounded | "has storyteller" - Relates a resource to a performer who contributes to a resource by relaying a creator's original story with dramatic or theatrical interpretation. | Erzähler_in (:warning: Unterscheidung zu narrator unklar!)
 `rdau:P60155` | literal or reference to Agent | min 0, max unbounded | "has speaker" - Relates a resource to a performer who contributes to a resource by speaking words, such as a lecture, speech, etc. | Sprecher_in / Vortragende_r
 `rdau:P60156` | literal or reference to Agent | min 0, max unbounded | "has singer" - Relates a resource to a performer who contributes to a resource by using his/her/their voice, with or without instrumental accompaniment, to produce music. a singer’s performance may or may not include actual words. | Sänger_in
+`rdau:P60162` | literal or reference to Place | min 0, max unbounded | "has place of manufacture" - Relates a resource to a place associated with the printing, duplicating, casting, etc., of a published resource. | Herstellungsort
 `rdau:P60163` | literal or reference to Place | min 0, max unbounded | "has place of publication" - Relates a resource to a place associated with the publication, release, or issuing of a published resource. | Erscheinungsort / Ort der Veröffentlichung
 `rdau:P60379` | literal or reference to Agent | min 0, max unbounded | "has arranger of music" - Relates a resource to an agent who contributes to a resource by rewriting a composition for a medium of performance different from that for which a resource was originally intended. | Musikarrangement durch, Arrangeur_in Musik
 `rdau:P60381` | literal or reference to Agent | min 0, max unbounded | "has draftsman" - Relates a resource to an agent who contributes to a resource by an architect, inventor, etc., by making detailed plans or drawings for buildings, ships, aircraft, machines, objects, etc. | Entwurf durch, Designer_in des Entwurfs
@@ -298,6 +305,7 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 Properties | Value type | Cardinality | FIDDK Note
 ------------|------------|------------|------------|
 `rdau:P60095` | reference to Agent (Orga) | min 0, max unbounded | "has affiliation", Affiliation, Beziehung einer Person zu einer Organisation (Anstellung, Mitglied, ...)
+`foaf:depiction` | reference | min 0, max 1 | Referenz zu einem Bild der Person
 
 #### foaf:Organization
 Hier auf Basis von `foaf:Organzation` der Object Templates, im Original EDM gibt es `foaf:Organzation` in der Form nicht, kann auf diese Weise aber wieder in das Original EDM zurückgeführt werden.
@@ -308,6 +316,7 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------|
 `skos:prefLabel` | literal | min 0, max 1 per lang tag | The preferred form of the name of the agent. Although the maximum number of occurrences is set at 1, it can be interpreted as 1 per language tag. At least one `skos:prefLabel` SHOULD be provided. Several prefLabels with languages tags are strongly recommended for language variants and translations.<br>`<skos:prefLabel xml:lang="fr">Courtois neveu aîné</skos:prefLabel>` <br> `<skos:prefLabel xml:lang="en">Courtois’eldest nephew</skos:prefLabel>` | bevorzugter Name der Körperschaft; Sprachtag sofern bekannt
 `skos:altLabel` | literal | min 0, max unbounded | Alternative forms of the name of the agent. This is a *recommended* property for this class.<br>`<skos:altLabel xml:lang="en">Courtois</skos:altLabel>`<br>`<skos:altLabel xml:lang="fr">Augte. Courtois aîné</skos:altLabel>` | Namensvarianten; Sprachtag sofern bekannt
+`skos:note` | literal | min 0, max unbounded | A note about the agent e.g. biographical notes. `<skos:note>Courtois neveu aîné started a company of the same name manufacturing brass instruments in Paris in 1803</skos:note>` | Beschreibung der Körperschaft
 `dc:identifier`	| literal | min 0, max unbounded | An identifier of the agent.<br>`<dc:identifier>http://viaf.org/viaf/96994048</dc:identifier>` | Weitere lokale Identifier
 ~~`rdaGr2:dateOfEstablishment`~~ `rdau:P60524` | literal **or reference to Timespan** | min 0, max 1 | The date on which the agent (corporate body) was established or founded. ~~`<rdaGr2:dateOfEstablishment>1795</rdaGr2:dateOfEstablishment>`~~ | Annex B folgend nach rdau (has date of establishment) gemappt; Datum der Gründung der Körperschaft (Beginn)
 ~~`rdaGr2:dateOfTermination`~~ `rdau:P60525` | literal **or reference to Timespan** | min 0, max 1 | The dateon which the agent (corporate body) was terminated or dissolved. ~~`<rdaGr2:dateOfTermination>1895</rdaGr2:dateOfTermination>`~~ | Annex B folgend nach rdau (has date of termination) gemappt; Datum der Auflösung der Körperschaft (Ende)
@@ -321,6 +330,7 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ~~`edm:europeanaRole`~~ |	~~literal or reference to Concept~~ | ~~min 1, max 1~~ | ~~To indicate the role and relationship of an organization toEuropeana.~~ | Europeana spezifisch
 `foaf:homepage` |	reference | min 0, max 1 | The URL for the home page of the organization | Homepage der Körperschaft
 `foaf:logo` |	reference | min 0, max 1 | - | Logo der Körperschaft
+`edm:wasPresentAt` | reference to Event | min 0, max unbounded | - | Verweis zu einem Ereignis, an dem die Körperschaft beteiligt war (Art der Beteiligung hier nicht klar :arrow_right: andere Richtung von Ereignis zu Körperschaft bevorzugt)
 `dcterms:hasPart` |	reference to Agent	| min 0, max unbounded | Reference to an Agent that is part of the Agent being described (e.g. a part of a corporation).<br>`<dcterms:hasPart rdf:resource=“http://identifier/partOfCorporation/”>` | Verweis auf untergeordnete Körperschaften
 `dcterms:isPartOf` | reference to Agent | min 0, max unbounded | Reference to an agent that the described agent is part of. `<dcterms:isPartOf rdf:resource=“http://identifier/parentCorporation/”>` | Verweis auf übergeordnete Körperschaften
 `owl:sameAs` | reference to Agent (Orga) | min 0, max unbounded | - | Link zu GND oder anderen Dubletten
@@ -329,6 +339,7 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 Properties | Value type | Cardinality | FIDDK Note
 ------------|------------|------------|------------|
 `edm:isNextInSequence` | reference to Agent (Orga) | min 0, max unbounded | Für die Abbildung von Vorgänger/Nachfolger Körperschaften (zeitlich)
+`foaf:depiction` | reference | min 0, max 1 | Referenz zu einem Bild der Körperschaft
 
 ### edm:Place
 Ein Ort kann im FIDDK auch ein Theatergebäude sein (im Unterschied zur Institution des Theaters als Körperschaften).
@@ -412,6 +423,12 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 
 #### Zusätzliche Event Properties im FIDDK
 - alle Tätigkeitsproperties, die auch zu `edm:ProvidedCHO` hinzugefügt wurden (s.o.)
+- sowie:
+
+Properties | Value type | Cardinality | FIDDK Note
+------------|------------|------------|------------|
+`foaf:depiction` | reference | min 0, max 1 | Referenz zu einem Bild des Ereignisses
+`foaf:homepage` |	reference | min 0, max 1 | Homepage zum Ereignis
 
 ## Statistik
 Welche Properties werden tatsächlich in welcher Anzahl genutzt?
@@ -448,6 +465,24 @@ Im FIDDK werden alle Datumsangaben als Zeitspanne angegeben (auch wenn es nur ei
 - `1994-01-01T00:00:00Z_*` (1994-)
 - `-0009-01-01T00:00:00Z_-0009-12-31T23:59:59Z` (Jahr 10 v.Chr. (Jahr 0 wird als Jahr 1 v.Chr. betrachtet))
 
+## Modellierung von Unsicherheit
+Im FIDDK werden Unsicherheiten durch das Attribut `@uncertainty` abgebildet, das an Orts- oder Datumsangaben angehängt werden kann. Die Werte in `@uncertainty` entsprechen der im Original als Literal angegebenen Unsicherheit und sind genormt (s. erlaubte Werte). Dies folgt keinem Standard, sondern ist ein Versuch die Unsicherheiten, die in den Ursprungsdaten vorhanden sind, abzubilden. Bisher erlaubte Werte in `@uncertainty` und Mapping Notes für ähnliche Begriffe, die auf die erste Spalte gemappt wurden:
+
+German | English | Mapping Note
+----|----|----|
+ca. | ca. | ?
+um | around
+vor | before
+nach | after
+zwischen | between
+Frühling | Spring | Frühjahr, Lenz
+Sommer | Summer
+Herbst | Autumn
+Winter | Winter
+[] _(im Fall von Orten)_ | []
+
+Für Werte wie "bis" oder "seit" werden `*-` bzw. `-*` benutzt (siehe Datumsformatierung). Völlig unklare Werte wie "früher" werden nicht abgebildet.
+
 ## XML Schema
 XML Schema des FIDDK basiert auf [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
 
@@ -459,8 +494,11 @@ XML Schema des FIDDK basiert auf [EDM XML Schema](https://github.com/europeana/c
 
 ## Aktuell ungelöste Probleme
 - Bühnenbildner (nicht in rdau vorhanden)
+- Signatur
 - Darstellung von Produktionen / Inszenierungen (aktuell als abstraktes `edm:ProvidedCHO`)
 - Darstellung von Werken (aktuell als abstraktes `edm:ProvidedCHO`)
 - Festivals (aktuell als `edm:Event` mit `dc:type` Festival und untergeordneten Ereignissen mit `dcterms:hasPart`)
 - Vokabular für Ereignistyp
+- Vokabular Gender
+- Anzeige im Portal für Tätigkeiten (allgemeiner Begriff (Regie) oder gegendert (Regisseur_in))?
 - Unterscheidung Herausgeber_in / Redakteur_in (im Englischen ist beides "editor"), aktuelle Lösung ist evtl nicht ganz korrekt
