@@ -68,9 +68,9 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 ### Zusätzliche Namespaces im FIDDK
 - `bibo`: http://purl.org/ontology/bibo/
 - `rdau`: http://rdaregistry.info/Elements/u/
-- `dm2e`: http://onto.dm2e.eu/schemas/dm2e/
+- `bf`: http://id.loc.gov/ontologies/bibframe/
 
-Der DM2E Namespace ist eigentlich über den Link nicht mehr erreichbar und wahrscheinlich deprecated. Er wird nur noch für `dm2e:callNumber` und `dm2e:subtitle` verwendet, da es keine passende Entsprechung für "Signatur" bzw. "Untertitel" in den anderen Namespaces gibt.
+Der DM2E Namespace ist über den Link http://onto.dm2e.eu/schemas/dm2e/ nicht mehr erreichbar und wahrscheinlich deprecated. Er wird seit Oktober 2020 nicht mehr verwendet, und wurde durch bibframe und rdau properties vollständig ersetzt.
 
 ## EDM Core Classes
 `edm:ProvidedCHO`, `ore:Aggregation` und `edm:WebResource` repräsentieren Informationen über das Cultural Heritage Object. Im Gegensatz zu den kontextuellen Klassen, die Personen/Körperschaften, Orte, Ereignisse, Konzepte oder Epochen beschreiben, die mit dem Objekt in Relation stehen.
@@ -147,16 +147,16 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 #### Zusätzliche ProvidedCHO Properties im FIDDK
 - Sofern nicht anders angegeben, wird der Originaldefinition der Property gefolgt.
 - RDAU hätte noch weitere interessante Tätigkeitsproperties und auch um Objektbeziehungen genauer zu definieren (ist choreografische Adaption von..., Drehbuch basiert auf..., hat Libretto... usw.). So detailliert wird es jedoch selten von Datengeber_innen erfasst.
-- bibo kann nicht durch rdau ersetzt werden. Es gibt zwar ISSN, aber nicht ISBN oder volume
-- dm2e kann nicht vollständig durch rdau ersetzt werden
+- bibo kann nicht durch rdau ersetzt werden. Es gibt zwar ISSN, aber nicht ISBN. In bibframe gibt es ISBN und ISSN nur als Klassen nicht als Properties.
+- dm2e wurde durch rdau und bibframe vollständig ersetzt
 
-Properties | Value type | Cardinality | Bibo / Dm2e / Rdau Note | FIDDK Note
+Properties | Value type | Cardinality | Bibo / Bf / Rdau Note | FIDDK Note
 ------------|------------|------------|------------|------------|
 `bibo:isbn` | literal | min 0, max 1 | ISBN | ISBN bei Büchern; Formatprüfung auf ISBN
 `bibo:issn` | literal | min 0, max 1 | ISSN | ISSN bei Zeitschriften; Formatprüfung auf ISSN
-`bibo:volume` | literal | min 0, max 1 | A volume number | Volume; im FIDDK auch: Bandangabe, Jahrgang, Nummer in Serie, Opus-Nummer
-`dm2e:callNumber` | literal | min 0, max 1 | The call number for some archival item | Signatur
-`dm2e:subtitle` | literal | min 0, max unbounded | Any form of a subtitle. | Untertitel, Titelzusätze, nicht Untertitel in Filmen
+`bf:partNumber` | literal | min 0, max 1 | Part or section enumeration of a title. Possible title component. | Volume, Bandangabe, Jahrgang, Nummer in Serie, Opus-Nummer
+`bf:shelfMark` | literal | min 0, max 1 | Piece identifier, such as a call or other type of number. | Signatur
+`bf:subtitle` | literal | min 0, max unbounded | Word, character, or group of words and/or characters that contains the remainder of the title after the main title. Possible title component. | Untertitel, Titelzusätze, nicht Untertitel in Filmen
 `rdau:P60062` | literal or reference to Agent | min 0, max unbounded | "has production company" - Relates a resource to an agent who is responsible for managing the financial, technical, and organizational aspects of a production for stage, screen, sound recording, television, webcast, etc. | Produktionsfirma (Theater/Film/...)
 `rdau:P60066` | literal or reference to Agent | min 0, max unbounded | "has collector" - Relates a resource to a curator that brings together resources from various sources that are arranged, described, or catalogued as a collection. | Sammler_in (nicht Kurator_in :arrow_right: gibt es in rdau auch: `rdau:P60376`)
 `rdau:P60074` | literal or reference to Timespan | min 0, max unbounded | "has date of capture" - Relates a resource to a timespan associated with recording, filming, etc., the content of a resource. | Aufnahmedatum bei Mitschnitten (Audio/Video)
