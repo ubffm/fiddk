@@ -204,6 +204,7 @@ Properties | Value type | Cardinality | Bibo / Bf / Rdau Note | FIDDK Note
 `rdau:P60456` | literal or reference to Agent | min 0, max unbounded | "has addressee" - Relates a resource to an agent to whom a resource or part of a resource is addressed. | Adressat_in / Rezipient_in
 `rdau:P60475` | literal or reference to Agent | min 0, max unbounded | "has sculptor" - Relates a resource to an agent who is an artist who is responsible for creating a three-dimensional resource by modeling, carving, or similar technique. | Bildhauer_in / Skulpteur_in
 `rdau:P60476` | literal or reference to Agent | min 0, max unbounded | "has screenwriter" - Relates a resource to an agent who is an author of a screenplay, script, or scene. | Drehbuchautor_in
+`rdau:P60477` | literal or reference to Agent | min 0, max unbounded | "has lyricist" - Relates a resource to an agent who is an author of the words of a popular song, including a song from a musical. | Lyriker_in
 `rdau:P60478` | literal or reference to Agent | min 0, max unbounded | "has librettist" - Relates a resource to an agent who is an author of the words of a musical or choreographic resource such as an opera, a ballet, or other resource for the musical stage, or an oratorio. | Librettist_in
 `rdau:P60811` | literal or reference to Agent | min 0, max unbounded | "has sound designer" - Relates a resource to an agent who contributes to a resource by designing and creating audio or sound components. | Sounddesigner_in / Tondesigner_in
 `rdau:P60813` | literal or reference to Agent | min 0, max unbounded | "has lighting designer" - Relates a resource to an agent who contributes to a resource by designing and creating lighting components. | Lichtdesigner_in / Beleuchter_in
@@ -496,11 +497,11 @@ XML Schema des FIDDK basiert auf [EDM XML Schema](https://github.com/europeana/c
 
 ## Aktuell ungelöste Probleme
 - Bühnenbildner (nicht in rdau vorhanden)
-- Signatur
+- ~~Signatur~~
 - Darstellung von Produktionen / Inszenierungen (aktuell als abstraktes `edm:ProvidedCHO`)
 - Darstellung von Werken (aktuell als abstraktes `edm:ProvidedCHO`)
 - Festivals (aktuell als `edm:Event` mit `dc:type` Festival und untergeordneten Ereignissen mit `dcterms:hasPart`)
 - Vokabular für Ereignistyp
 - Vokabular Gender
-- Anzeige im Portal für Tätigkeiten (allgemeiner Begriff (Regie) oder gegendert (Regisseur_in))?
+- ~~Anzeige im Portal für Tätigkeiten (allgemeiner Begriff (Regie) oder gegendert (Regisseur_in))?~~
 - Unterscheidung Herausgeber_in / Redakteur_in (im Englischen ist beides "editor"), aktuelle Lösung ist evtl nicht ganz korrekt
