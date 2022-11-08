@@ -472,12 +472,12 @@ Im FIDDK werden alle Datumsangaben als Zeitspanne angegeben (auch wenn es nur ei
 
 ## Modellierung von Unsicherheit
 Im FIDDK werden Unsicherheiten durch das Attribut `@rdfs:label` abgebildet, das an Orts- oder Datumsangaben angehängt werden kann, sofern diese Unsicherheiten enthalten. Unsicherheiten können Angaben in eckigen Klammern [] und/oder mit Fragezeichen sein sowie beispielsweise unsichere Angaben bei Datumsangaben mit "ca./vor/um/nach...".<br>
-Die Werte in `@rdfs:label` entsprechen der im Original als Literal angegebenen Unsicherheit, sodass diese 1:1 im FID Portal angezeigt werden kann. Neben diesem Attribut wird in `@rdf:resource` eine standardisierste Version angeboten, wenn möglich. <br>
+Die Werte in `@rdfs:label` entsprechen der im Original als Literal angegebenen Unsicherheit, sodass diese 1:1 im FID Portal angezeigt werden kann. Neben diesem Attribut wird wenn möglich eine standardisierste Version angeboten. <br>
 Dies folgt keinem Standard, sondern ist ein Versuch die Unsicherheiten, die in den Ursprungsdaten vorhanden sind, abzubilden.
 
 ### Beispiele
-- `<dcterms:issued rdf:resource="1810-01-01T00:00:00Z_1810-12-31T23:59:59Z" rdfs:label="ca. 1810">`
-- `<edm:happenedAt rdf:resource="http://www.performing-arts.eu/place/gnd_4023118-5" rdfs:label="[Hamburg?]">`
+- `<dcterms:issued rdfs:label="ca. 1810">1810-01-01T00:00:00Z_1810-12-31T23:59:59Z</dcterms:issued>`
+- `<edm:happenedAt rdf:resource="http://www.performing-arts.eu/place/gnd_4023118-5" rdfs:label="[Hamburg?]"/>`
 
 ## XML Schema
 XML Schema des FIDDK basiert auf [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
