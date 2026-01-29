@@ -420,7 +420,7 @@ Events basieren entweder auf der GND (Konferenz oder Ereignis bzw. Konferenz-/Er
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------
 `edm:happenedAt` | reference to Place **or literal** | min 0, max unbounded | - | Ereignisort
-`edm:occuredAt` |	reference to TimeSpan **or literal** | min 0, max unbounded | - | Datum des Ereignisses
+`edm:occurredAt` |	reference to TimeSpan **or literal** | min 0, max unbounded | - | Datum des Ereignisses
 `owl:sameAs` | reference to Event | min 0, max unbounded | - | Link zu GND Ereignis oder Dubletten
 `skos:prefLabel` | literal | min 0, max 1 per lang tag | - | Bevorzugter Ereignisname; Sprachtag sofern bekannt
 `skos:altLabel` | literal	| min 0, max unbounded | - | Alternativer Ereignisname; Sprachtag sofern bekannt
@@ -428,7 +428,7 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 `dc:identifier` | literal | min 0, max unbounded | - | Andere lokale IDs für diese Entität
 `dcterms:hasPart` |	reference to Event **or literal** | min 0, max unbounded | - | Verweis auf untergeordnetes Ereignis. Interessant für Festivals oder Reihen von Aufführungen, kam bisher noch nicht vor
 `dcterms:isPartOf` | reference to Event **or literal** | min 0, max unbounded | - | Verweis auf übergeordnetes Ereignis. Interessant für Festivals oder Reihen von Aufführungen, kam bisher noch nicht vor
-~~`crm:P120_occurs_before`~~ | ~~reference to Event~~ | ~~min 0, max unbounded~~ | - | Bedarf auszudrücken, dass ein Ereignis zeitlich vor einem anderen Ereignis stattgefunden hat, kam aktuell noch nicht vor. Abgesehen davon kann dies durch `edm:occuredAt` herausgefunden werden.
+~~`crm:P120_occurs_before`~~ | ~~reference to Event~~ | ~~min 0, max unbounded~~ | - | Bedarf auszudrücken, dass ein Ereignis zeitlich vor einem anderen Ereignis stattgefunden hat, kam aktuell noch nicht vor. Abgesehen davon kann dies durch `edm:occurredAt` herausgefunden werden.
 `edm:hasType` |	literal or reference to Concept | min 0, max unbounded | - | Art des Ereignises (Premiere, ...) :arrow_right: Basierend auf GND Sachbegriffen (:warning:noch kein fertiges Vokabular)
 `edm:isRelatedTo` |	reference	to Event **or literal** | min 0, max unbounded | - | Verweis auf vergleichbare / in Beziehung stehende Ereignisse
 
