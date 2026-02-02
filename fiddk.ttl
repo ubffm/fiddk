@@ -879,11 +879,30 @@ fiddk-sh:PersonShape
     a sh:NodeShape ;
     sh:targetClass foaf:Person ;
 
+
+
+    # 1) max. ein prefLabel pro *nicht-leerem* Sprach-Tag
     sh:property [
         sh:path skos:prefLabel ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
         sh:nodeKind sh:Literal ;
+        sh:uniqueLang true
+    ] ;
+
+    # 2) max. ein prefLabel ohne Sprach-Tag
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Maximal ein skos:prefLabel ohne Sprach-Tag pro Ressource."@de ;
+        sh:select """
+          PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+          SELECT $this
+          WHERE {
+            $this skos:prefLabel ?l .
+            FILTER ( isLiteral(?l) && LANG(?l) = "" )
+          }
+          GROUP BY $this
+          HAVING (COUNT(?l) > 1)
+        """
     ] ;
 
     sh:property [
