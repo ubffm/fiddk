@@ -29,7 +29,7 @@ fiddk-sh:ProvidedCHOShape
         sh:minCount 0 ;
     ] ;
 
-    # dc:coverage (0..*), einer von dc:subject, dc:type, dcterms:spatial oder dcterms:temporal ist Pflicht
+    # dc:coverage (0..*)
     sh:property [
         sh:path dc:coverage ;
         sh:minCount 0 ;
@@ -40,6 +40,12 @@ fiddk-sh:ProvidedCHOShape
         sh:path dc:creator ;
         sh:minCount 0 ;
     ] ;
+
+    # Mindestens eins von dc:title | dc:description ist Pflicht
+    sh:or (
+      [ sh:property [ sh:path dc:title ;       sh:minCount 1 ] ]
+      [ sh:property [ sh:path dc:description ; sh:minCount 1 ] ]
+    ) ;
 
     # dc:description (0..*) – Beschreibung ODER Titel muss vorhanden sein
     sh:property [
@@ -85,6 +91,14 @@ fiddk-sh:ProvidedCHOShape
         sh:minCount 0 ;
     ] ;
 
+    # Mindestens eins von dc:subject | dc:type | dcterms:spatial | dcterms:temporal ist Pflicht
+    sh:or (
+      [ sh:property [ sh:path dc:subject ;       sh:minCount 1 ] ]
+      [ sh:property [ sh:path dc:type ;          sh:minCount 1 ] ]
+      [ sh:property [ sh:path dcterms:spatial ;  sh:minCount 1 ] ]
+      [ sh:property [ sh:path dcterms:temporal ; sh:minCount 1 ] ]
+    ) ;
+
     # dc:subject (0..*)
     sh:property [
         sh:path dc:subject ;
@@ -102,7 +116,7 @@ fiddk-sh:ProvidedCHOShape
     # dc:type (1..*)
     sh:property [
         sh:path dc:type ;
-        sh:minCount 1 ;
+        sh:minCount 0 ;
     ] ;
 
     # dcterms:alternative (0..*)
