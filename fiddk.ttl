@@ -203,7 +203,7 @@ fiddk-sh:ProvidedCHOShape
         sh:path edm:type ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        sh:nodeKind sh:Literal ;
+        sh:datatype xsd:string ;
         sh:in ( "TEXT" "IMAGE" "SOUND" "VIDEO" "3D" ) ;
     ] ;
 
