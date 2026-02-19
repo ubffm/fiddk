@@ -198,12 +198,13 @@ fiddk-sh:ProvidedCHOShape
         sh:maxCount 1 ;
     ] ;
 
-    # edm:type (1..1)
+    # edm:type (1..1) mit kontrollierter Werteliste
     sh:property [
         sh:path edm:type ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:nodeKind sh:Literal ;
+        sh:in ( "TEXT" "IMAGE" "SOUND" "VIDEO" "3D" ) ;
     ] ;
 
     # owl:sameAs (0..*)
