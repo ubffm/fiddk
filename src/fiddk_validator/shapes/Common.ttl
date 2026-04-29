@@ -1,0 +1,41 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix edm:     <http://www.europeana.eu/schemas/edm/> .
+@prefix ore:     <http://www.openarchives.org/ore/terms/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix fiddk-sh: <https://performing-arts.eu/shapes/fiddk/> .
+
+#################################################################
+# Globale Klassen-Constraints
+#################################################################
+
+fiddk-sh:AllowedClassShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf rdf:type ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:in (
+            ore:Aggregation
+            edm:ProvidedCHO
+            edm:WebResource
+            edm:Event
+            edm:Place
+            edm:TimeSpan
+            foaf:Person
+            foaf:Organization
+            skos:Concept
+        ) ;
+        sh:message "Die Klasse {?value} ist im FIDDK-Datenmodell nicht zugelassen."@de ;
+        sh:severity sh:Violation ;
+    ] .
+
+fiddk-sh:ForbiddenEdmAggregationShape
+    a sh:NodeShape ;
+    sh:targetClass edm:Aggregation ;
+    sh:message "Die Klasse edm:Aggregation ist unzulässig; verwende ore:Aggregation."@de ;
+    sh:severity sh:Violation ;
+    sh:not [
+        sh:class edm:Aggregation
+    ] .
